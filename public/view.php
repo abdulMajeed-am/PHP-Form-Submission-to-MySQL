@@ -19,6 +19,8 @@ $data = $stmt->fetchAll();
     <title>View Submissions</title>
     <!-- Add Bootstrap CDN for styling -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -29,7 +31,7 @@ $data = $stmt->fetchAll();
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th>ID</th><th>Name</th><th>Email</th><th>Submitted At</th>
+                    <th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Submitted At</th><th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,7 +40,13 @@ $data = $stmt->fetchAll();
                     <td><?= htmlspecialchars($row['id']) ?></td>
                     <td><?= htmlspecialchars($row['name']) ?></td>
                     <td><?= htmlspecialchars($row['email']) ?></td>
+                    <td><?= htmlspecialchars($row['phone']) ?></td>
                     <td><?= htmlspecialchars($row['created_at']) ?></td>
+                    <td>
+                        <a href="edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-outline-primary" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
