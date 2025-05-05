@@ -1,54 +1,71 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+require_once '../partials/header.php';
+require_once '../partials/sidebar.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Form</title>
-    <!-- Add Bootstrap CDN for styling -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <h2 class="text-center mb-4">Form Submission</h2>
-
-            <form action="submit.php" method="POST">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
-                </div>
-
-                <div class="mb-3">
-                    <label>Phone:</label>
-                    <input type="text" name="phone" class="form-control" placeholder="Enter your phone number" required>
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-block">Submit</button>
-            </form>
-
-            <div class="mt-3 text-center">
-                <a href="view.php" class="btn btn-info btn-sm">View Submissions</a>
-            </div>
-        </div>
+<div class="content">
+  <h2 class="mb-4">Dashboard</h2>
+  <div class="row">
+    <div class="chart-card col-md-6">
+      <h5 class="text-center">Bar Chart: Users Registered Daily</h5>
+      <canvas id="barChart"></canvas>
     </div>
+    <div class="chart-card col-md-6">
+      <h5 class="text-center">Pie Chart: Users Registered Share</h5>
+      <canvas id="pieChart"></canvas>
+    </div>
+  </div>
 </div>
 
-<!-- Add Bootstrap JS (Optional, if you need JS components like modals or tooltips) -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="assets/css/style.css">
+
+
+<script>
+fetch('../charts/chart-data.php')
+  .then(response => response.json())
+  .then(data => {
+    // ✅ Bar Chart (Corrected data path)
+    const barCtx = document.getElementById('barChart').getContext('2d');
+    new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: data.bar.labels,
+        datasets: [{
+          label: 'Users Registered (daily)',
+          data: data.bar.counts,
+          backgroundColor: '#007bff'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+
+    // ✅ Pie Chart (already correct)
+    const pieCtx = document.getElementById('pieChart').getContext('2d');
+    new Chart(pieCtx, {
+      type: 'pie',
+      data: {
+        labels: data.pie.labels,
+        datasets: [{
+          data: data.pie.counts,
+          backgroundColor: [
+            '#007bff', '#28a745', '#dc3545', '#ffc107',
+            '#17a2b8', '#6610f2', '#fd7e14', '#20c997', '#e83e8c'
+          ]
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+  });
+</script>
 
 </body>
 </html>

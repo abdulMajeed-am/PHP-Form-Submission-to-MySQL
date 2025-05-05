@@ -1,6 +1,10 @@
 <!-- Add Bootstrap CDN for styling -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+<?php
+require_once '../partials/header.php';
+require_once '../partials/sidebar.php';
+?>
 
 <?php
 // Include DB connection
@@ -54,7 +58,7 @@ $data = $stmt->fetchAll();
     </div>
 
     <div class="text-center mt-3">
-        <a href="../public/index.php" class="btn btn-secondary btn-sm">Go Back to Form</a>
+        <a href="../public/add-user.php" class="btn btn-secondary btn-sm">Go Back to Form</a>
     </div>
 </div>
 
