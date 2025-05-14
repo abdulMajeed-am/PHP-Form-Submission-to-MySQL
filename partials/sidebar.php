@@ -6,6 +6,7 @@
   <a href="../public/index.php"><i class="fas fa-chart-bar"></i> Dashboard</a>
   <a href="../public/add-user.php"><i class="fas fa-user-plus"></i> Add User</a>
   <a href="../public/view.php"><i class="fas fa-users"></i> View Users</a>
+  <a href="logout.php" class="btn btn-sm btn-danger">Logout</a>
   <link rel="stylesheet" href="assets/css/style.css">
 
 </div>
