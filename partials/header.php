@@ -8,7 +8,7 @@
   <title>Admin Dashboard</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
+  <!-- <style>
     body {
       display: flex;
       min-height: 100vh;
@@ -31,7 +31,7 @@
     .content {
       flex-grow: 1;
       padding: 20px;
-    }
+    } -->
   </style>
 </head>
 <body>

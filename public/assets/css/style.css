@@ -1,114 +1,131 @@
-/* Reset some default spacing */
+/* ====== GLOBAL RESET ====== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body, html {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  /* Sidebar styling */
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* ====== SIDEBAR ====== */
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #343a40;
+  color: #fff;
+  padding: 20px 15px;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+.sidebar h4 {
+  text-align: center;
+  margin-bottom: 30px;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar a {
+  color: #ddd;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background-color: #495057;
+  color: #fff;
+}
+
+/* Collapsed Sidebar (on hover out) */
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar.collapsed h4 {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.sidebar.collapsed a span {
+  display: none;
+}
+
+/* ====== CONTENT AREA ====== */
+.content {
+  margin-left: 220px;
+  padding: 30px;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+.sidebar.collapsed ~ .content {
+  margin-left: 70px;
+}
+
+/* ====== PAGE HEADINGS ====== */
+h2 {
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+/* ====== CHART CARDS ====== */
+.chart-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 10px 0 30px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
+  transition: transform 0.3s ease;
+}
+
+.chart-card:hover {
+  transform: translateY(-3px);
+}
+
+.chart-card h5 {
+  font-weight: 600;
+  color: #333;
+}
+
+/* ====== CHART CANVAS ====== */
+canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
   .sidebar {
-    width: 220px;
-    height: 100vh;
     position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #343a40;
-    color: #fff;
-    padding: 20px 15px;
-    overflow-y: auto;
-    transition: all 0.3s ease;
+    width: 220px;
+    transform: translateX(-100%);
+    z-index: 1000;
   }
-  
-  .sidebar h4 {
-    text-align: center;
-    margin-bottom: 30px;
+
+  .sidebar.open {
+    transform: translateX(0);
   }
-  
-  .sidebar a {
-    color: #ddd;
-    display: block;
-    text-decoration: none;
-    margin-bottom: 15px;
-    padding: 10px 15px;
-    border-radius: 4px;
-    transition: background 0.3s ease;
-  }
-  
-  .sidebar a:hover,
-  .sidebar a.active {
-    background-color: #495057;
-    color: #fff;
-  }
-  
-  /* Content styling */
+
   .content {
-    margin-left: 250px;
-    padding: 30px;
-    background-color: #f8f9fa;
-    min-height: 100vh;
-    transition: all 0.3s ease;
-  }
-  
-  h2 {
-    font-weight: 600;
-    margin-bottom: 30px;
-  }
-  
-  /* Card containers */
-  .chart-card {
-    background: #fff;
-    border-radius: 10px;
+    margin-left: 0;
     padding: 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   }
-  
-  /* Chart canvas responsive */
-  canvas {
-    width: 100% !important;
-    height: auto !important;
-  }
-  
-  /* Responsive: stack sidebar on small screens */
-  @media (max-width: 768px) {
-    .sidebar {
-      position: relative;
-      width: 100%;
-      height: auto;
-    }
-  
-    .content {
-      margin-left: 0;
-      padding: 20px;
-    }
-  }
-  .chart-card {
-    background-color: #fff;
-    margin: 10px;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
-    padding: 20px;
-    margin-bottom: 30px;
-    transition: transform 0.3s ease;
-  }
-  
-  .chart-card:hover {
-    transform: translateY(-3px);
-  }
-  
-  .chart-card h5 {
-    font-weight: 600;
-    color: #333;
-  }
-  .content h2 {
-    font-weight: 700;
-    color: #2c3e50;
-    margin-bottom: 30px;
-  }
-  .content h2 {
-    font-weight: 700;
-    color: #2c3e50;
-    margin-bottom: 30px;
-  }
-  
+}
